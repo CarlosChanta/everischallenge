@@ -1,0 +1,23 @@
+---
+# tasks file for userSudo
+- name: Asegurar la existencia del grupo Wheel
+  group:
+    name: wheel
+    state: present
+
+- name: Cambiar permiso a wheel en sudoers
+  become: true
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: visudo -cf %s
+
+- name: Agregar sudoers al grupo wheel
+  become: true
+  user:
+    name: "{{ item }}"
+    groups: wheel
+    append: yes
+  with_items: "{{ sudoers }}"

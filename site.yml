@@ -1,0 +1,18 @@
+---
+- hosts: all
+  vars:
+    sudoers:
+      - cchanta #DE PRUEBA
+      - challenge
+  roles: 
+    - userSudo #ROL QUE GENERA EL USUARIO CHALLENGE PASSWORDLESS
+- hosts: es-master-1
+  become: true
+  roles:
+    - geerlingguy.java
+    - geerlingguy.elasticsearch
+
+- hosts: javaspring-1
+  become: true
+  roles:
+    - geerlingguy.java
