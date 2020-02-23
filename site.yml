@@ -2,17 +2,20 @@
 - hosts: all
   vars:
     sudoers:
-      - cchanta #DE PRUEBA
       - challenge
   roles: 
-    - userSudo #ROL QUE GENERA EL USUARIO CHALLENGE PASSWORDLESS
-- hosts: es-master-1
-  become: true
-  roles:
-    - geerlingguy.java
-    - geerlingguy.elasticsearch
+    - userSudo  #ROL QUE GENERA EL USUARIO CHALLENGE PASSWORDLESS
 
-- hosts: javaspring-1
+- hosts: logstash
+  roles:
+    - installDocker
+
+- hosts: kibana
+  roles:
+    - installDocker #ROL QUE INSTALA DOCKER SEARCH DIRECTAMENTE EN LA VM
+
+- hosts: javaspring
   become: true
   roles:
     - geerlingguy.java
+    - installDocker

@@ -1,0 +1,7 @@
+---
+# handlers file for installDocker
+- name: Reiniciar Docker daemon
+  service:
+    name: docker
+    state: restarted
+  become: yes

@@ -1,31 +1,39 @@
 es-master-nodes:
     hosts:
-      es-master-1:                    # VM hostname
+      elasticsearch:                    # VM hostname
         ansible_host: 192.168.16.11   # IP 
-        ansible_user: vagrant
-        memory: 2048                  # RAM
+        ansible_user: challenge
+        memory: 3072                  # RAM
+        hnum: 9200
+        hguest: 9200
         ansible_ssh_private_key_file: .vagrant/machines/es-master-1/virtualbox/private_key
   
 kibana-nodes:
     hosts:
-      kibana-1:
+      kibana:
         ansible_host: 192.168.16.12
-        ansible_user: vagrant
+        ansible_user: challenge
         memory: 512
+        hnum: 5601
+        hguest: 5601
         ansible_ssh_private_key_file: .vagrant/machines/kibana-1/virtualbox/private_key
 
 logstash-nodes:
     hosts:
-      logstash-1:
+      logstash:
         ansible_host: 192.168.16.13
-        ansible_user: vagrant
+        ansible_user: challenge
         memory: 1536
+        hnum: 5044
+        hguest: 5044
         ansible_ssh_private_key_file: .vagrant/machines/logstash-1/virtualbox/private_key
 
-javaspring-nodes:
+javaspring:
     hosts:
-      javaspring-1:
+      javaspring:
         ansible_host: 192.168.16.14
-        ansible_user: vagrant
+        ansible_user: challenge
         memory: 1024
+        hnum: 1609
+        hguest: 1609
         ansible_ssh_private_key_file: .vagrant/machines/javaspring-1/virtualbox/private_key
