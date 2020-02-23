@@ -1,0 +1,44 @@
+---
+# tasks file for installES
+- name: Change root password
+  user: name=root update_password=always password="{{ 'testing' | password_hash('sha512') }}"
+
+- name: Aañadir la GPG key de elasticsearch
+  rpm_key:
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Añadir el repo de elasticsearch.
+  template:
+    src: elasticsearch.repo.j2
+    dest: /etc/yum.repos.d/elasticsearch.repo
+    mode: 0644
+
+- name: Instalar ElasticSearch.
+  package:
+    name: elasticsearch
+    state: "{{ elasticsearch_package_state }}"
+  
+- name: Configurar Elasticsearch con el YML
+  template:
+    src: "{{ item }}.j2"
+    dest: /etc/elasticsearch/{{ item }}
+    owner: root
+    group: elasticsearch
+    mode: 0660
+  with_items:
+    - elasticsearch.yml
+    - jvm.options
+
+- name: Iniciar ElasticSearch!
+  service:
+    name: elasticsearch
+    state: "{{ elasticsearch_service_state }}"
+    enabled: "{{ elasticsearch_service_enabled }}"
+
+- name: Verificar si corre elasticsearch (checar puerto)
+  wait_for:
+    host: "{{ elasticsearch_network_host }}"
+    port: "{{ elasticsearch_http_port }}"
+    delay: 3
+    timeout: 3000

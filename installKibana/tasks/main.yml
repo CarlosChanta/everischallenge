@@ -1,0 +1,6 @@
+---
+# tasks file for installKibana
+- name: Pulear imagen de Kibana
+  docker_image:
+    name: kibana:7.6.0
+    source: pull

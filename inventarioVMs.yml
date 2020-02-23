@@ -3,7 +3,7 @@ es-master-nodes:
       elasticsearch:                    # VM hostname
         ansible_host: 192.168.16.11   # IP 
         ansible_user: challenge
-        memory: 3072                  # RAM
+        memory: 4096                  # RAM
         hnum: 9200
         hguest: 9200
         ansible_ssh_private_key_file: .vagrant/machines/es-master-1/virtualbox/private_key

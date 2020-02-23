@@ -1,0 +1,4 @@
+---
+# handlers file for installES
+#- name: Reiniciar elasticsearch
+#  service: name=elasticsearch state=restarted

@@ -4,18 +4,24 @@
     sudoers:
       - challenge
   roles: 
-    - userSudo  #ROL QUE GENERA EL USUARIO CHALLENGE PASSWORDLESS
+    - userSudo          #ROL QUE GENERA EL USUARIO CHALLENGE PASSWORDLESS
+
+- hosts: elasticsearch
+  become: true
+  roles:
+    - geerlingguy.java  #ROL DE ANSIBLE GALAXY QUE INSTALA JAVA
+    - installES         #ROL QUE INSTALA ELASTICSEARCH
 
 - hosts: logstash
   roles:
-    - installDocker
+    - installDocker     #ROL QUE INSTALA DOCKER SEARCH DIRECTAMENTE EN LA VM
 
 - hosts: kibana
   roles:
-    - installDocker #ROL QUE INSTALA DOCKER SEARCH DIRECTAMENTE EN LA VM
+    - installDocker     
 
 - hosts: javaspring
   become: true
   roles:
-    - geerlingguy.java
+    - geerlingguy.java  
     - installDocker
