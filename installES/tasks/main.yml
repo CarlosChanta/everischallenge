@@ -3,7 +3,7 @@
 - name: Change root password
   user: name=root update_password=always password="{{ 'testing' | password_hash('sha512') }}"
 
-- name: Aañadir la GPG key de elasticsearch
+- name: Añadir la GPG key de elasticsearch
   rpm_key:
     key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     state: present
@@ -12,7 +12,7 @@
   template:
     src: elasticsearch.repo.j2
     dest: /etc/yum.repos.d/elasticsearch.repo
-    mode: 0644
+    mode: 7777
 
 - name: Instalar ElasticSearch.
   package:
@@ -31,6 +31,7 @@
     - jvm.options
 
 - name: Iniciar ElasticSearch!
+  become: true
   service:
     name: elasticsearch
     state: "{{ elasticsearch_service_state }}"

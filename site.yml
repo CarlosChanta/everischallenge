@@ -8,9 +8,12 @@
 
 - hosts: elasticsearch
   become: true
+  vars:
+    es_version: 7.6.0
   roles:
-    - geerlingguy.java  #ROL DE ANSIBLE GALAXY QUE INSTALA JAVA
-    - installES         #ROL QUE INSTALA ELASTICSEARCH
+    - elastic.elasticsearch
+#    - geerlingguy.java  #ROL DE ANSIBLE GALAXY QUE INSTALA JAVA
+#    - installES         #ROL QUE INSTALA ELASTICSEARCH
 
 - hosts: logstash
   roles:
