@@ -1,16 +1,19 @@
 ---
 # tasks file for installDocker
 - name: Instalar yum utils
+  become: true
   yum:
     name: yum-utils
     state: latest
 
 - name: Instalar device-mapper-persistent-data (te pide como dependency)
+  become: true
   yum:
     name: device-mapper-persistent-data
     state: latest
 
 - name: Install lvm2
+  become: true
   yum:
     name: lvm2
     state: latest
@@ -19,24 +22,24 @@
   get_url:
     url: https://download.docker.com/linux/centos/docker-ce.repo
     dest: /etc/yum.repos.d/docker-ce.repo
-  become: yes
+  become: true
 
 - name: Instalando Docker
   package:
     name: docker-ce
     state: latest
-  become: yes
+  become: true
 
 - name: Iniciar Docker daemon
   service:
     name: docker
     state: started
     enabled: yes
-  become: yes
+  become: true
 
 - name: Añadir al grupo
   user:
     name: challenge
     groups: docker
     append: yes
-  become: yes
+  become: true
