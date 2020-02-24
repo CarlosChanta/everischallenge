@@ -11,17 +11,19 @@
   vars:
     es_version: 7.6.0
   roles:
-    - elastic.elasticsearch
-#    - geerlingguy.java  #ROL DE ANSIBLE GALAXY QUE INSTALA JAVA
-#    - installES         #ROL QUE INSTALA ELASTICSEARCH
+    - geerlingguy.java  #ROL DE ANSIBLE GALAXY QUE INSTALA JAVA
+    - installES         #ROL QUE INSTALA ELASTICSEARCH
+  # - elastic.elasticsearch
 
 - hosts: logstash
   roles:
     - installDocker     #ROL QUE INSTALA DOCKER SEARCH DIRECTAMENTE EN LA VM
+    - installLogstash
 
 - hosts: kibana
   roles:
-    - installDocker     
+    - installDocker
+    - installKibana     
 
 - hosts: javaspring
   become: true

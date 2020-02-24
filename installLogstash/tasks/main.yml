@@ -1,2 +1,16 @@
 ---
 # tasks file for installLogstash
+- name: Pulear imagen de logstash
+  docker_image:
+    name: logstash:7.6.0
+    source: pull
+
+- name: Correr Imagen logstash 
+  docker_container:
+    name: logstashVagrant
+    state: present
+    image: logstash:7.6.0
+    volumes:
+      - /tmp:/tmp
+    exposed_ports:
+      - 5044

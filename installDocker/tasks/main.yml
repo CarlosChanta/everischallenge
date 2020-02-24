@@ -6,6 +6,24 @@
     name: yum-utils
     state: latest
 
+- name: Instalar SCL
+  become: true
+  yum:
+    name: centos-release-scl 
+    state: latest
+
+- name: Instalar Python
+  become: true
+  yum:
+    name: rh-python36 
+    state: latest
+
+- name: Instalar Python-Docker
+  become: true
+  yum:
+    name: python-docker 
+    state: latest
+
 - name: Instalar device-mapper-persistent-data (te pide como dependency)
   become: true
   yum:

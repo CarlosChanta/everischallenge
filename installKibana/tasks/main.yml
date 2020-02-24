@@ -4,3 +4,13 @@
   docker_image:
     name: kibana:7.6.0
     source: pull
+
+- name: Correr Imagen Kibana 
+  docker_container:
+    name: kibanaVagrant
+    state: present
+    image: kibana:7.6.0
+    volumes:
+      - /tmp:/tmp
+    exposed_ports:
+      - 5601
